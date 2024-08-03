@@ -20,7 +20,7 @@ The Diary App is a web-based application that allows users to create, edit, and 
 
 ## Live Deployment
 
-You can view the live version of the Diary App at the following URL:https://diary-app-kh6l.onrender.com
+You can view the live version of the Diary App at the following URL:"https//diary-app-kh6l.onrender.com"
 
 ## How to Use
 
@@ -31,19 +31,16 @@ You can view the live version of the Diary App at the following URL:https://diar
 
 To run this application locally:
 
-1. **Clone the Repository**
-  
-   git clone https://github.com/your-username/diary-app.git
-
-2. **Install Dependencies**
+1.Clone the Repository
+2.Install Dependencies
 
 cd diary-app
 npm install
 
-3. **Run the Application**
+3.Run the Application
 
 npm start
-Open http://localhost:3000 in your browser.
+Open "https//localhost:3000" in your browser.
 
 ### Configuration
 
