@@ -1,4 +1,4 @@
-const db = require('../db/connect'); // Import the database connection
+const db = require('../db/connect'); 
 
 class Entry {
     constructor({ id, user_id, date, text, category }) {

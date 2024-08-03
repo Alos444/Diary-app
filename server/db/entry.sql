@@ -1,9 +1,8 @@
--- Drop existing tables if they exist
+
 DROP TABLE IF EXISTS images;
 DROP TABLE IF EXISTS entries;
 DROP TABLE IF EXISTS users;
 
--- Create users table
 CREATE TABLE users (
     id SERIAL PRIMARY KEY,
     username VARCHAR(50) UNIQUE NOT NULL,
@@ -12,7 +11,6 @@ CREATE TABLE users (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create entries table
 CREATE TABLE entries (
     id SERIAL PRIMARY KEY,
     user_id INTEGER REFERENCES users(id) ON DELETE SET NULL,
@@ -23,7 +21,6 @@ CREATE TABLE entries (
     updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Create images table
 CREATE TABLE images (
     id SERIAL PRIMARY KEY,
     entry_id INTEGER REFERENCES entries(id) ON DELETE CASCADE,
@@ -31,18 +28,15 @@ CREATE TABLE images (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
--- Insert sample data into users
 INSERT INTO users (username, email, password_hash) VALUES
 ('john_doe', 'john.doe@example.com', 'hashedpassword123'),
 ('jane_smith', 'jane.smith@example.com', 'hashedpassword456');
 
--- Insert sample data into entries
 INSERT INTO entries (user_id, date, text, category) VALUES
 (1, '2024-07-28 10:00:00', 'Today was a great day! I went walking along the Thames and saw some beautiful scenery.', 'Leisure'),
 (1, '2024-07-29 12:30:00', 'Tried a new recipe for lunch. It turned out delicious!', 'Food'),
 (2, '2024-07-30 15:45:00', 'Had a productive work session and completed a major project.', 'Work');
 
--- Insert sample data into images
 INSERT INTO images (entry_id, image_url) VALUES
 (1, 'http://example.com/images/hiking.jpg'),
 (2, 'http://example.com/images/recipe.jpg'),

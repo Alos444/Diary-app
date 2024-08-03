@@ -117,23 +117,22 @@ label {
 }
 
 .alert.success {
-    background-color: #77927d; /* Green for success */
+    background-color: #77927d; 
 }
 
 .alert.error {
-    background-color: #e42743; /* Red for errors */
+    background-color: #e42743;
 }
 
-/* Responsive Design */
 @media (max-width: 800px) {
     .container {
-        flex: 1 1 calc(50% - 20px); /* 2 containers per row on smaller screens */
+        flex: 1 1 calc(50% - 20px); 
     }
 }
 
 @media (max-width: 600px) {
     .container {
-        flex: 1 1 calc(100% - 20px); /* 1 container per row on very small screens */
+        flex: 1 1 calc(100% - 20px); 
     }
 }
 

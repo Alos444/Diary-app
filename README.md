@@ -18,12 +18,36 @@ The Diary App is a web-based application that allows users to create, edit, and 
 - Bootstrap 5
 - Node.js (Backend API for handling entries)
 
-## Installation
+## Live Deployment
 
-To run the Diary App locally, follow these steps:
+You can view the live version of the Diary App at the following URL:https://diary-app-kh6l.onrender.com
 
-1. **Clone the repository:**
+## How to Use
 
-   ```bash
-   git clone https://github.com/yourusername/diary-app.git
-   cd diary-app
+1. **Access the App**: Visit the live app using the link above.
+2. **Features**: Users can create, read, update, and delete diary entries.
+
+### Running Locally
+
+To run this application locally:
+
+1. **Clone the Repository**
+  
+   git clone https://github.com/your-username/diary-app.git
+
+2. **Install Dependencies**
+
+cd diary-app
+npm install
+
+3. **Run the Application**
+
+npm start
+Open http://localhost:3000 in your browser.
+
+### Configuration
+
+Ensure you have the following environment variables set in your .env file:
+
+DATABASE_URL=your-database-url
+SECRET_KEY=your-secret-key
