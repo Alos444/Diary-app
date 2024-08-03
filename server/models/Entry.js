@@ -1,4 +1,4 @@
-const db = require('../db/connect'); 
+const db = require('../db/connect');
 
 class Entry {
     constructor({ id, user_id, date, text, category }) {
@@ -43,18 +43,28 @@ class Entry {
     static async search(date, category) {
         let query = 'SELECT * FROM entries WHERE TRUE';
         const values = [];
+        let valueIndex = 1;
+        
         if (date) {
-            query += ' AND date::date = $1';
+            query += ` AND DATE(date) = $${valueIndex++}`;
             values.push(date);
         }
         if (category) {
-            query += ' AND category ILIKE $2';
+            query += values.length ? ` AND category ILIKE $${valueIndex++}` : ` AND category ILIKE $${valueIndex++}`;
             values.push(`%${category}%`);
         }
-        const result = await db.query(query, values);
-        return result.rows.map(row => new Entry(row));
+
+        console.log('Executing query:', query); // Debugging line
+        console.log('With values:', values); // Debugging line
+
+        try {
+            const result = await db.query(query, values);
+            return result.rows.map(row => new Entry(row));
+        } catch (error) {
+            console.error('Database query error:', error);
+            throw error;
+        }
     }
 }
 
 module.exports = Entry;
-

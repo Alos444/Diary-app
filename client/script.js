@@ -56,7 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         const data = Object.fromEntries(formData.entries());
 
         try {
-            const response = await fetch('/api/entries/search?' + new URLSearchParams(data).toString(), {
+            const query = new URLSearchParams(data).toString();
+            const response = await fetch(`/api/entries/search?${query}`, {
                 method: 'GET'
             });
             if (response.ok) {
@@ -83,7 +84,11 @@ document.addEventListener('DOMContentLoaded', () => {
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify({ text: data.text })
+                body: JSON.stringify({
+                    date: data.date,
+                    text: data.text,
+                    category: data.category
+                })
             });
             if (response.ok) {
                 showAlert('Entry updated successfully!', 'success');
@@ -109,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             if (response.ok) {
                 showAlert('Entry deleted successfully!', 'success');
-                deleteForm.reset(); // Clear the form after deletion
+                deleteForm.reset(); // Clear the form after delete
             } else {
                 showAlert('Failed to delete entry.', 'error');
             }
@@ -118,25 +123,21 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
-    // Display entries
     function displayEntries(entries) {
-        entriesList.innerHTML = ''; // Clear existing entries
+        entriesList.innerHTML = '';
         entries.forEach(entry => {
             const li = document.createElement('li');
-            li.textContent = `ID: ${entry.id}, Date: ${entry.date}, Category: ${entry.category}, Text: ${entry.text}`;
+            li.textContent = `${entry.date}: ${entry.text} (Category: ${entry.category})`;
             entriesList.appendChild(li);
         });
     }
 
-    // Show alerts
     function showAlert(message, type) {
-        const alert = document.createElement('div');
-        alert.className = `alert ${type}`;
-        alert.textContent = message;
-        alerts.innerHTML = ''; // Clear previous alerts
-        alerts.appendChild(alert);
+        alerts.innerHTML = `<div class="alert ${type}">${message}</div>`;
         setTimeout(() => {
-            alerts.innerHTML = ''; // Remove alert after a while
-        }, 3000);
+            alerts.innerHTML = '';
+        }, 5000);
     }
 });
+
+

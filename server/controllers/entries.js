@@ -23,7 +23,7 @@ exports.getAllEntries = async (req, res) => {
 
 exports.getEntryById = async (req, res) => {
     try {
-        const entry = await Entry.findById(req.params.id);
+        const entry = await Entry.findById(parseInt(req.params.id, 10));
         if (entry) {
             res.status(200).json(entry);
         } else {
@@ -37,11 +37,12 @@ exports.getEntryById = async (req, res) => {
 
 exports.updateEntry = async (req, res) => {
     try {
-        const entry = await Entry.findById(req.params.id);
+        const { date, text, category } = req.body;
+        const entry = await Entry.findById(parseInt(req.params.id, 10));
         if (entry) {
-            entry.date = req.body.date;
-            entry.text = req.body.text;
-            entry.category = req.body.category;
+            if (date) entry.date = date;
+            if (text) entry.text = text;
+            if (category) entry.category = category;
             await entry.update();
             res.status(200).json(entry);
         } else {
@@ -55,7 +56,7 @@ exports.updateEntry = async (req, res) => {
 
 exports.deleteEntry = async (req, res) => {
     try {
-        const entry = await Entry.findById(req.params.id);
+        const entry = await Entry.findById(parseInt(req.params.id, 10));
         if (entry) {
             await entry.delete();
             res.status(204).end();
@@ -71,10 +72,13 @@ exports.deleteEntry = async (req, res) => {
 exports.searchEntries = async (req, res) => {
     try {
         const { date, category } = req.query;
-        const entries = await Entry.search(date, category);
+        const entries = await Entry.search(date || '', category || '');
         res.status(200).json(entries);
     } catch (error) {
         console.error('Error searching entries:', error);
         res.status(500).json({ error: 'Internal Server Error' });
     }
 };
+
+
+
