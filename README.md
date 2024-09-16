@@ -1,5 +1,7 @@
 # Diary App
 
+![image](diary.PNG)
+
 The Diary App is a web-based application that allows users to create, edit, and delete diary entries. Each entry can be categorized and searched by date or category.
 
 ## Features
